@@ -54,5 +54,14 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 
 	id := r.URL.Query().Get("id")
 
-	log.Println(id)
+	idConvertido, err := strconv.Atoi(id)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	models.Delete(idConvertido)
+
+	http.Redirect(w, r, "/", 301)
+
 }
